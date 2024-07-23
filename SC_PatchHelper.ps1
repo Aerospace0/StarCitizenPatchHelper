@@ -7,8 +7,6 @@ If(-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentit
 }
 
 
-# $rootPath = Read-Host -Prompt "Enter the path where the Library folder is located. If unsure, run RSI Launcher > Settings > Library Folder (e.g. F:\RSI)"
-
 $rootPath = "C:\Program Files\Roberts Space Industries"
 
 $version = Read-Host -Prompt "Enter the version you want to modify (e.g. LIVE, PTU, EPTU, TECH)"
@@ -50,19 +48,8 @@ if ($sourcebindings -eq $null -or $sourcefolder -eq $null) {
     }
 }
 
-# $backupfolder = "$env:localappdata\Star Citizen Backup $version $((Get-Date).ToString("MMddyyyy"))"
 $backupfolder = "$env:localappdata\Star Citizen Backup $version $((Get-Date).ToString("yyyyMMddHHmmss"))"
 $attributesbackup = "$backupfolder\attributes"
-
-
-# this code 
-# if ($confirm -eq 'yes') {
-#     # Script code
-#     if (!(Test-Path -Path $backupfolder)) {
-#         New-Item -ItemType directory -Path $backupfolder
-#     }
-#     Copy-Item -Path $sourcebindings.FullName -Destination $backupfolder -Recurse
-# }
 
 $shadersfolder = "$env:localappdata\Star Citizen"
 
@@ -99,7 +86,6 @@ if (Test-Path $backupfolder -PathType Container) {
     # folder exists, continue with the script
 } else {
     Write-Host "Folder $backupfolder does not exist"
-    # stop the script or take other necessary actions
 }
 
 $confirm = Read-Host -Prompt "Do you want to continue and remove your shader and user folders? (yes/no)"
