@@ -9,31 +9,36 @@ If(-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentit
 
 $rootPath = "C:\Program Files\Roberts Space Industries"
 
-$version = Read-Host -Prompt "Enter the version you want to modify (e.g. LIVE, PTU, EPTU, TECH)"
+$version = Read-Host -Prompt "Enter the version you want to modify (e.g. LIVE, PTU, EPTU, TECH, 4.0_PREVIEW)"
 
 switch ($version) {
     "LIVE" {
         $sourcebindings = Get-ChildItem -Path "$rootPath\StarCitizen\LIVE" -Directory -Recurse | Where-Object {$_.Name -eq "Mappings"}
         $sourcecharacters = Get-ChildItem -Path "$rootPath\StarCitizen\LIVE" -Directory -Recurse | Where-Object {$_.Name -eq "CustomCharacters"}
-		$sourceattributes = Get-ChildItem -Path "$rootPath\StarCitizen\LIVE" -File -Recurse | Where-Object {$_.Name -eq "attributes.xml"}
+	$sourceattributes = Get-ChildItem -Path "$rootPath\StarCitizen\LIVE" -File -Recurse | Where-Object {$_.Name -eq "attributes.xml"}
         $sourcefolder = Get-ChildItem -Path "$rootPath\StarCitizen\LIVE" -Directory -Recurse | Where-Object {$_.Name -eq "USER"}
     }
     "PTU" {
         $sourcebindings = Get-ChildItem -Path "$rootPath\StarCitizen\PTU" -Directory -Recurse | Where-Object {$_.Name -eq "Mappings"}
         $sourcecharacters = Get-ChildItem -Path "$rootPath\StarCitizen\PTU" -Directory -Recurse | Where-Object {$_.Name -eq "CustomCharacters"}
         $sourceattributes = Get-ChildItem -Path "$rootPath\StarCitizen\PTU" -File -Recurse | Where-Object {$_.Name -eq "attributes.xml"}
-		$sourcefolder = Get-ChildItem -Path "$rootPath\StarCitizen\PTU" -Directory -Recurse | Where-Object {$_.Name -eq "USER"}
+	$sourcefolder = Get-ChildItem -Path "$rootPath\StarCitizen\PTU" -Directory -Recurse | Where-Object {$_.Name -eq "USER"}
     }
     "EPTU" {
         $sourcebindings = Get-ChildItem -Path "$rootPath\StarCitizen\EPTU" -Directory -Recurse | Where-Object {$_.Name -eq "Mappings"}
         $sourcecharacters = Get-ChildItem -Path "$rootPath\StarCitizen\EPTU" -Directory -Recurse | Where-Object {$_.Name -eq "CustomCharacters"}
         $sourceattributes = Get-ChildItem -Path "$rootPath\StarCitizen\EPTU" -File -Recurse | Where-Object {$_.Name -eq "attributes.xml"}
-		$sourcefolder = Get-ChildItem -Path "$rootPath\StarCitizen\EPTU" -Directory -Recurse | Where-Object {$_.Name -eq "USER"}
+	$sourcefolder = Get-ChildItem -Path "$rootPath\StarCitizen\EPTU" -Directory -Recurse | Where-Object {$_.Name -eq "USER"}
     }"TECH" {
         $sourcebindings = Get-ChildItem -Path "$rootPath\StarCitizen\TECH-PREVIEW" -Directory -Recurse | Where-Object {$_.Name -eq "Mappings"}
         $sourcecharacters = Get-ChildItem -Path "$rootPath\StarCitizen\TECH-PREVIEW" -Directory -Recurse | Where-Object {$_.Name -eq "CustomCharacters"}
         $sourceattributes = Get-ChildItem -Path "$rootPath\StarCitizen\TECH-PREVIEW" -File -Recurse | Where-Object {$_.Name -eq "attributes.xml"}
-		$sourcefolder = Get-ChildItem -Path "$rootPath\StarCitizen\TECH-PREVIEW" -Directory -Recurse | Where-Object {$_.Name -eq "USER"}
+	$sourcefolder = Get-ChildItem -Path "$rootPath\StarCitizen\TECH-PREVIEW" -Directory -Recurse | Where-Object {$_.Name -eq "USER"}
+    }"4.0_PREVIEW" {
+        $sourcebindings = Get-ChildItem -Path "$rootPath\StarCitizen\4.0_PREVIEW" -Directory -Recurse | Where-Object {$_.Name -eq "Mappings"}
+        $sourcecharacters = Get-ChildItem -Path "$rootPath\StarCitizen\4.0_PREVIEW" -Directory -Recurse | Where-Object {$_.Name -eq "CustomCharacters"}
+        $sourceattributes = Get-ChildItem -Path "$rootPath\StarCitizen\4.0_PREVIEW" -File -Recurse | Where-Object {$_.Name -eq "attributes.xml"}
+	$sourcefolder = Get-ChildItem -Path "$rootPath\StarCitizen\4.0_PREVIEW" -Directory -Recurse | Where-Object {$_.Name -eq "USER"}
     }
     default {
         Write-Host "Invalid input. Please enter a valid version (e.g. LIVE, PTU, EPTU)"
