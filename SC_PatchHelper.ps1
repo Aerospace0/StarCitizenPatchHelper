@@ -7,9 +7,11 @@ If(-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentit
 }
 
 
+# $rootPath = Read-Host -Prompt "Enter the path where the Library folder is located. If unsure, run RSI Launcher > Settings > Library Folder (e.g. F:\RSI)"
+
 $rootPath = "C:\Program Files\Roberts Space Industries"
 
-$version = Read-Host -Prompt "Enter the version you want to modify (e.g. LIVE, PTU, EPTU, TECH)"
+$version = Read-Host -Prompt "Enter the version you want to modify (e.g. LIVE, PTU, EPTU, TECH,4.0_PREVIEW)"
 
 switch ($version) {
     "LIVE" {
@@ -34,6 +36,11 @@ switch ($version) {
         $sourcecharacters = Get-ChildItem -Path "$rootPath\StarCitizen\TECH-PREVIEW" -Directory -Recurse | Where-Object {$_.Name -eq "CustomCharacters"}
         $sourceattributes = Get-ChildItem -Path "$rootPath\StarCitizen\TECH-PREVIEW" -File -Recurse | Where-Object {$_.Name -eq "attributes.xml"}
 		$sourcefolder = Get-ChildItem -Path "$rootPath\StarCitizen\TECH-PREVIEW" -Directory -Recurse | Where-Object {$_.Name -eq "USER"}
+    }"4.0_PREVIEW" {
+        $sourcebindings = Get-ChildItem -Path "$rootPath\StarCitizen\4.0_PREVIEW" -Directory -Recurse | Where-Object {$_.Name -eq "Mappings"}
+        $sourcecharacters = Get-ChildItem -Path "$rootPath\StarCitizen\4.0_PREVIEW" -Directory -Recurse | Where-Object {$_.Name -eq "CustomCharacters"}
+        $sourceattributes = Get-ChildItem -Path "$rootPath\StarCitizen\4.0_PREVIEW" -File -Recurse | Where-Object {$_.Name -eq "attributes.xml"}
+		$sourcefolder = Get-ChildItem -Path "$rootPath\StarCitizen\4.0_PREVIEW" -Directory -Recurse | Where-Object {$_.Name -eq "USER"}
     }
     default {
         Write-Host "Invalid input. Please enter a valid version (e.g. LIVE, PTU, EPTU)"
@@ -48,8 +55,19 @@ if ($sourcebindings -eq $null -or $sourcefolder -eq $null) {
     }
 }
 
+# $backupfolder = "$env:localappdata\Star Citizen Backup $version $((Get-Date).ToString("MMddyyyy"))"
 $backupfolder = "$env:localappdata\Star Citizen Backup $version $((Get-Date).ToString("yyyyMMddHHmmss"))"
 $attributesbackup = "$backupfolder\attributes"
+
+
+# this code 
+# if ($confirm -eq 'yes') {
+#     # Script code
+#     if (!(Test-Path -Path $backupfolder)) {
+#         New-Item -ItemType directory -Path $backupfolder
+#     }
+#     Copy-Item -Path $sourcebindings.FullName -Destination $backupfolder -Recurse
+# }
 
 $shadersfolder = "$env:localappdata\Star Citizen"
 
@@ -86,6 +104,7 @@ if (Test-Path $backupfolder -PathType Container) {
     # folder exists, continue with the script
 } else {
     Write-Host "Folder $backupfolder does not exist"
+    # stop the script or take other necessary actions
 }
 
 $confirm = Read-Host -Prompt "Do you want to continue and remove your shader and user folders? (yes/no)"
