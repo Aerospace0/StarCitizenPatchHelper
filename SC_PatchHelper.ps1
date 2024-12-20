@@ -91,7 +91,6 @@ if (Test-Path $backupfolder -PathType Container) {
     # folder exists, continue with the script
 } else {
     Write-Host "Folder $backupfolder does not exist"
-    # stop the script or take other necessary actions
 }
 
 $confirm = Read-Host -Prompt "Do you want to continue and remove your shader and user folders? (yes/no)"
