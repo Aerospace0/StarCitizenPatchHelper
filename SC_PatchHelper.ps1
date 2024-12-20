@@ -11,7 +11,7 @@ If(-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentit
 
 $rootPath = "C:\Program Files\Roberts Space Industries"
 
-$version = Read-Host -Prompt "Enter the version you want to modify (e.g. LIVE, PTU, EPTU, TECH,4.0_PREVIEW)"
+$version = Read-Host -Prompt "Enter the version you want to modify (e.g. LIVE, PTU, EPTU, TECH, 4.0_PREVIEW)"
 
 switch ($version) {
     "LIVE" {
